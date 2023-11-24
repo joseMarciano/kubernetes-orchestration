@@ -1,6 +1,6 @@
 # Kubernetes Training - Orchestrating the Future 🚀
 
-ubernetes Training, a fascinating journey into the art of orchestrating containers! 🐳
+Kubernetes Training, a fascinating journey into the art of orchestrating containers! 🐳
 
 ## About the Training
 
