@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
       - name: nginx-container
-        image: nginx
+        image: nginx:1.14.2
 
   selector:
     matchLabels:
       env: production
-  replicas: 5
+  replicas: 8
