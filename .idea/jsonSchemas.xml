@@ -14,6 +14,15 @@
                   <Item>
                     <option name="path" value="namespace/pod-namespace.yaml" />
                   </Item>
+                  <Item>
+                    <option name="path" value="service/cluster-ip/my-pod.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="service/cluster-ip/my-service.yaml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value="service/cluster-ip/my-debian-pod.yaml" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>
