@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: frontend-service-loadbalancer
+
+spec:
+  type: LoadBalancer
+  selector:
+    app-type: web-app-label
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30008
