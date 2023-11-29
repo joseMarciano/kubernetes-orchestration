@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: liveness-pod
+
+spec:
+  containers:
+    - name: liveness-container-test
+      image: busybox
+      args: # When pod runs will be executed this command that creates /tmp/healthy wait 30 seconds, after that remove.
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+      livenessProbe:
+        exec: # will check if the /tmp/healthy exists
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        failureThreshold: 3
