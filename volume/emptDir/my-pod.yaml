@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: redis-pod
+spec:
+  volumes:
+    - name: cache-storage
+      emptyDir: {} # this volume will only be deleted if the pod died. If pod just restart, the volume will keep alive
+
+  containers:
+    - name: redis-container
+      image: redis
+      volumeMounts:
+        - mountPath: "/my-volume"
+          name: "cache-storage"
