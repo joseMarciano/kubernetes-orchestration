@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: redis-pod
+spec:
+  volumes:
+    - name: my-hostpath-vol
+      hostPath: # os dados permanecerão persistidos dentro do worker node, ou seja, resistirá a restarts e kills do pod
+        path: "/var/lib/2-persist"
+
+
+  containers:
+    - name: redis-container
+      image: redis
+      volumeMounts:
+        - mountPath: "/my-data"
+          name: "my-hostpath-vol"
+
