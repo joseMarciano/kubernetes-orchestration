@@ -15,3 +15,5 @@ OBS:
 - Show if label was created: `kubectl get nodes --show-labels | grep disktype=ssd`
 - To confirm pod by node: `kubectl get pods -o wide --field-select spec.nodeName=minikube-m03`
 
+## DaemonSet on Specific Nodes without labels(Direct attribution)
+You can change de dafault behavior of daemonset and set the nodename instead of labels.
