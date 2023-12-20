@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+
+spec:
+  #  restartPolicy: Never THIS COMMAND DOES NOT WORD IN JOB CONTEXT
+  template:
+    metadata:
+      name: my-job-pod
+    spec:
+      restartPolicy: Never #OnFailure | The restartPolicy in Job works only in Pod context
+      containers:
+        - name: my-container-busybox
+          image: busybox
+          command:
+            - "bin/sh"
+            - "-c"
+            - "for i in 1 2; do echo Lucky number $i = $((1 + RANDOM % 70)); done" # generate random number
