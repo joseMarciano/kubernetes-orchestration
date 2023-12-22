@@ -1,0 +1,21 @@
+# The Cronjob creates a Job and the Job creates a pod
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "* * * * *"
+#  failedJobsHistoryLimit: 5 This prop is to set max of JOBS that job-controller will keep in storage. The job controller periodically removes the jobs. when run this file, see `kubectl get jobs`
+#  successfulJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never #OnFailure | The restartPolicy in Job works only in Pod context
+          containers:
+            - name: my-container-busybox
+              image: busybox
+              command:
+                - "bin/sh"
+                - "-c"
+                - "for i in 1 2; do echo Lucky number $i = $((1 + RANDOM % 70)); done" # generate random number
