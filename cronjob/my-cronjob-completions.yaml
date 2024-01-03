@@ -1,0 +1,22 @@
+# The Cronjob creates a Job and the Job creates a pod
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 4 # number of pods that will run in parallel
+      completions: 10 # each time that job run, two pods will be created
+      completionMode: "Indexed" # The completions mode, create an index in each pod instead of a hash Ex: completionMode: "Indexed" -> `pod-0-xhxhx` | No CompletaionsMode: `pod-xhxhx
+      template:
+        spec:
+          restartPolicy: Never #OnFailure | The restartPolicy in Job works only in Pod context
+          containers:
+            - name: my-container-busybox
+              image: busybox
+              command:
+                - "bin/sh"
+                - "-c"
+                - "for i in 1 2; do echo Lucky number $i = $((1 + RANDOM % 70)); done" # generate random number
