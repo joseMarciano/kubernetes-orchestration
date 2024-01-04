@@ -1,0 +1,28 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-cm
+
+data:
+#  Connection database config
+  database: "mongodb"
+  database_uri: "mongodb://localhost:27017"
+
+#  User interface
+  font.title: "Arial"
+  background-color: "red"
+  theme.1: "clean"
+---
+# if you execute `kubectl exec -it pod-cm-env -- bash` and execute `env` command, you will se the environment variables
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-cm-env
+#  namespace: default
+spec:
+  containers:
+    - name: my-pod-container
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: my-cm
