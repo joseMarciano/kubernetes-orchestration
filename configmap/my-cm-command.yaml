@@ -1,0 +1,32 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-cm
+
+data:
+  #  Connection database config
+  database: "mongodb"
+  database_uri: "mongodb://localhost:27017"
+
+  #  User interface
+  font.title: "Arial"
+  background-color: "red"
+  theme.1: "clean"
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-cm-env
+#  namespace: default
+spec:
+  containers:
+    - name: my-pod-container
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: my-cm
+      command: # We can use the env variable that wwas configured in configmap
+        - "bin/sh"
+        - "-c"
+        - "echo My Database = $database - $database_uri"
+  restartPolicy: Never # In this case we need put this prop because the pod cannot restart after run the command
