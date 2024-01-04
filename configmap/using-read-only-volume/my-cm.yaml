@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-cm
+
+data:
+#  Connection database config
+  database: "mongodb"
+  database_uri: "mongodb://localhost:27017"
+
+#  User interface
+  font.title: "Arial"
+  background-color: "black"
+  theme.1: "clean"
