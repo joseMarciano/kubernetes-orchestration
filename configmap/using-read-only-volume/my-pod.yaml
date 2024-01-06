@@ -14,8 +14,9 @@ spec:
           mountPath: "/etc/testing-vol"
           readOnly: true
   # the configmap will be stored in  this volume. OBS: In this case will not set in environment variables.
-  # PROS: every update in my configmap, the files in volumes will be automatically updated too and we dont need restart the pod
-  # CONS: the variables are not set in environment variables. We need to read the files that is located in /etc/testing-vol
+  # PROS: every update in my configmap, the files in volumes will be automatically updated too, and we don't need to restart the pod
+  # CONS: - the variables are not set in environment variables. We need to read the files that is located in /etc/testing-vol
+  #       - each key value pair of my configmap will be stored in a separated file
   volumes:
     - name: my-vol
       configMap:
