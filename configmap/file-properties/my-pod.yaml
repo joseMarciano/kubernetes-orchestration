@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-cm-vol
+spec:
+  containers:
+    - name: my-pod-container
+      image: nginx
+#      envFrom:
+#        - configMapRef:
+#            name: my-cm
+      volumeMounts:
+        - name: my-vol
+          mountPath: "/etc/testing-vol"
+          readOnly: true
+  # the configmap will be stored in  this volume. OBS: In this case will not set in environment variables.
+  # PROS: - every update in my configmap, the files in volumes will be automatically updated too, and we don't need to restart the pod
+  #       - In this configmap, the pair of key values will be stored in one file
+  volumes:
+    - name: my-vol
+      configMap:
+        name: my-properties-file-cm
