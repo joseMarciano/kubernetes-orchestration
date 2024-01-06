@@ -8,5 +8,5 @@ data:
   my.config.db: |
     database="mariadb"
     database_uri="mariadb://localhost:3306"
-  each.propertie.here.is.a.file: | 
+  each.property.here.is.a.file: | 
     testing=123
