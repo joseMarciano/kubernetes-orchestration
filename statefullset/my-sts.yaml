@@ -1,0 +1,42 @@
+# To create a stateful-set we need a HeadlessService and a PersistenceVolume
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-sts
+spec:
+  ports:
+    - port: 80
+  clusterIP: None # To create HeadlessService
+  selector:
+    app: nginx-app-pods
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-sts
+spec:
+  serviceName: svc-sts
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx-app-pods
+    spec:
+      containers:
+        - name: my-container
+          image: nginx
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html
+              name: my-persistence-volume
+  selector:
+    matchLabels:
+      app: nginx-app-pods
+  volumeClaimTemplates: #volumeClaim means that this volume associate dynamically with each pod. Each pod will have a 1Gi volume available
+    - metadata:
+        name: my-persistence-volume
+      spec:
+        accessModes:
+          - ReadWriteOnce # This volume has read/write permissions
+        resources: # defining resources for my persistence volume
+          requests:
+            storage: 1Gi
