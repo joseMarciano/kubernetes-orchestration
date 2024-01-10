@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jupyter
+  annotations: # custom metadata that is used for whatever I want
+    description: "Namespace for Jupyter Notebook Application"
+    project: "Final Project K8s Course"
+    owner: "José Paulo Z Marciano"
+    email: "marciaja@marciaja.com"
+
